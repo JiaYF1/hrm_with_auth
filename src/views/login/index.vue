@@ -23,17 +23,19 @@
           </el-form-item>
         </el-form>
       </el-card>
+
     </div>
   </div>
 </template>
 <script>
+
 export default {
   name: 'Login',
   data() {
     return {
       loginForm: {
         mobile: process.env.NODE_ENV === 'development' ? '13800000002' : '',
-        password: process.env.NODE_ENV === 'development' ? '123456' : '',
+        password: process.env.NODE_ENV === 'development' ? 'hm#qd@23!' : '',
         isAgree: process.env.NODE_ENV === 'development'
       },
       loginRules: {
@@ -72,16 +74,16 @@ export default {
     }
   },
   methods: {
-    // login() {
-    //   this.$refs.form.validate(async(isOK) => {
-    //     if (isOK) {
-    //       await this.$store.dispatch('user/login', this.loginForm)
-    //       // Vuex 中的action 返回的promise
-    //       // 跳转主页
-    //       this.$router.push('/')
-    //     }
-    //   })
-    // }
+    login() {
+      this.$refs.form.validate(async(isOK) => {
+        if (isOK) {
+          await this.$store.dispatch('user/login', this.loginForm)
+          // Vuex 中的action 返回的promise
+          // 跳转主页
+          this.$router.push('/')
+        }
+      })
+    }
 
   }
 }
