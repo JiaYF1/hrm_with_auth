@@ -38,6 +38,7 @@ const actions = {
   },
   // 获取用户的基本资料
   async getUserInfo(context) {
+    console.log(111)
     const result = await getUserInfo()
     context.commit('setUserInfo', result)
     return result // 返回数据
