@@ -3,9 +3,7 @@
     <transition name="sidebarLogoFade">
       <router-link key="collapse" class="sidebar-logo-link" to="/">
         <img src="@/assets/common/logo.png" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
       </router-link>
-
     </transition>
   </div>
 </template>
@@ -21,8 +19,8 @@ export default {
   },
   data() {
     return {
-      title: '霏宝的后台管理系统',
-      logo: '@/assets/common/logo.png'
+      title: 'Vue Admin Template',
+      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }
 }
@@ -43,7 +41,6 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-
   text-align: center;
   overflow: hidden;
 
@@ -52,8 +49,7 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 140px;
       vertical-align: middle;
       margin-right: 12px;
     }
@@ -73,6 +69,8 @@ export default {
   &.collapse {
     .sidebar-logo {
       margin-right: 0px;
+      width: 32px;
+      height: 32px;
     }
   }
 }

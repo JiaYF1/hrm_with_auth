@@ -2,8 +2,8 @@ import router from '@/router'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store'
-// import { asyncRoutes } from '@/router'
-
+import { asyncRoutes } from '@/router'
+import { isMenuIncluded } from '@/utils'
 /**
  *前置守卫
  *
@@ -37,7 +37,18 @@ router.beforeEach(async(to, from, next) => {
       //   next() // 放过
       // }
       if (!store.getters.userInfo.userId) {
-        await store.dispatch('user/getUserInfo')
+        const { roles } = await store.dispatch('user/getUserInfo')
+        console.log(roles)
+        // 筛选路由
+        const filterRoutes = asyncRoutes.filter(item => {
+          // 递归筛选当前item及其children中是否包含menu
+          return isMenuIncluded(roles.menus, item)
+          // return true/false
+        }) // 筛选后的路由
+        // console.log(filterRoutes)
+        store.commit('user/setRoutes', filterRoutes)
+        router.addRoutes([...filterRoutes, { path: '*', redirect: '/404', hidden: true }]) // 添加动态路由信息到路由表
+        next(to.path) // 目的是让路由拥有信息 router的已知缺陷
       }
       next() // 放过
     }

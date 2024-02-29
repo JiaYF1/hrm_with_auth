@@ -134,3 +134,11 @@ export function transListToTreeData(list, rootValue) {
   })
   return arr
 }
+
+// 通过递归检验asyncRoutes中的路由及子路由中是否包含menu
+export function isMenuIncluded(menus, routeItem) {
+  if (routeItem.children && routeItem.children.length > 0) {
+    return isMenuIncluded(menus, routeItem.children)
+  }
+  return menus.includes(routeItem[0].name)
+}
